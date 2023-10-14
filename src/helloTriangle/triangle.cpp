@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cmath>
 
 void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -62,7 +63,7 @@ int main() {
     // will try to change to something more neat
     std::string vs_str, fs_str;
     vs_str = readShader("./src/simpleVS.glsl");
-    fs_str = readShader("./src/simpleFS.glsl");
+    fs_str = readShader("./src/uniformFs.glsl");
     const char* vs_cstr = vs_str.c_str();
     const char* fs_cstr = fs_str.c_str();
 
@@ -138,7 +139,7 @@ int main() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)( 3 * sizeof(float)));
     glEnableVertexAttribArray(0);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     // rendering loop
     while (!glfwWindowShouldClose(window))
     {
@@ -152,6 +153,11 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(shader_program);
+        float now = glfwGetTime();
+        float green_value = sin(now)/2.0f + 0.5f;
+        int vertex_color_location = glGetUniformLocation(shader_program, "ourColor");
+        glUniform4f(vertex_color_location, 0.0f, green_value, 0.0f, 1.0f);
+
         if (draw_VAO) 
             glBindVertexArray(VAO);
         else 

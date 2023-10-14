@@ -2,9 +2,9 @@
 CC=/usr/bin/clang++
 LANG_STD=-std=c++14
 COMPILER_FLAGS=-Wall -g -Wno-deprecated
-INCLUDE_PATH=-I./include
-SRC_FILES=./src/main.cpp ./src/glad.c
-LINKER_FLAGS=./lib/libglfw.3.dylib -Wl,-rpath ./lib
+INCLUDE_PATH=-I../../include
+SRC_FILES=../Shader.cpp shader_class_test.cpp ../glad.c
+LINKER_FLAGS=../../lib/libglfw.3.dylib -Wl,-rpath ../../lib
 FRAMEWORK_FLAGS=-framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo -framework CoreFoundation
 
 EXECUTABLE=app
